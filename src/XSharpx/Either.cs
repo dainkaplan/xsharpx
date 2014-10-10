@@ -209,6 +209,10 @@ namespace XSharpx {
       return k.Fold(x => Either<X, B>.Left(x), a => Either<X, B>.Right(f(a)));
     }
 
+    public static Either<X, A> SelectLeft<X, A, B>(this Either<B, A> k, Func<B, X> f) {
+      return k.Fold(x => Either<X, A>.Left(f(x)), a => Either<X, A>.Right(a));
+    }
+
     public static Either<X, B> SelectMany<X, A, B>(this Either<X, A> k, Func<A, Either<X, B>> f) {
       return k.Fold(x => Either<X, B>.Left(x), f);
     }
