@@ -194,6 +194,14 @@ namespace XSharpx {
         return Either<Exception, B>.Left(e);
       }
     }
+
+    public static Either<A, B> FromTryCatch<A,B>(Func<B> f) where A : Exception {
+      try {
+        return Either<A, B>.Right(f());
+      } catch(A e) {
+        return Either<A, B>.Left(e);
+      }
+    }
   }
 
   public static class EitherExtension {
